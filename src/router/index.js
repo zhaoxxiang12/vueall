@@ -1,27 +1,64 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Student from '../components/student/Student.vue';
+import FrontPage from '../components/FrontPage.vue';
+import StudentAdd from '../components/student/StudentAdd.vue';
+import StudentList from '../components/student/StudentList.vue';
+import User from '../components/user/User.vue';
+import Register from '../components/user/Register.vue';
+import UserLogin from '../components/user/UserLogin.vue';
+import StudentUpdate from '../components/student/StudentUpdate.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
+// 配置(url和组件的映射)
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    {
+        path: '/',
+        redirect: '/user/login',
+    },
+    {
+        path: '/student',
+        component: Student,
+        children: [
+            {
+                path: 'studentAdd',
+                component: StudentAdd,
+            },
+            {
+                path: 'StudentList',
+                component: StudentList,
+            },
+            {
+                path: 'StudentUpdate',
+                component: StudentUpdate,
+            },
+        ],
+    },
+    {
+        path: '/frontPage',
+        component: FrontPage,
+    },
+    // 用户
+    {
+        path: '/user',
+        component: User,
+        children: [
+            {
+                path: 'register',
+                component: Register,
+            },
+            {
+                path: 'login',
+                component: UserLogin,
+            },
+        ],
+    },
+];
 
 const router = new VueRouter({
-  routes
-})
+    routes,
+});
 
-export default router
+// 暴露路由对象
+export default router;
