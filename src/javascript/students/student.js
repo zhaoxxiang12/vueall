@@ -53,6 +53,11 @@ function getStudent (params) {
     })
 }
 
+/**
+ * 
+ * @param {String} data 学生id
+ * @returns 返回promise对象
+ */
 function updateStu (data) {
     return axios ({
         url: '/stus/updstu',
@@ -60,6 +65,7 @@ function updateStu (data) {
         data
     })
 }
+
 
 export default {
     getAllStudent,
