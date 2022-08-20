@@ -7,7 +7,7 @@ import axios from '../http/axios.js'
  */
 function getAllStudent(params) {
     return axios({
-        url: '/stus/getAllStus',
+        url: '/students/getAllStus',
         method: 'get',
         params
     });
@@ -47,7 +47,7 @@ function delStudent (data) {
  */
 function getStudent (params) {
     return axios({
-        url:'/stus/selectId',
+        url:'/students/queryStudent',
         method: 'get',
         params
     })
@@ -60,8 +60,8 @@ function getStudent (params) {
  */
 function updateStu (data) {
     return axios ({
-        url: '/stus/updstu',
-        method: 'post',
+        url: '/students/update',
+        method: 'put',
         data
     })
 }

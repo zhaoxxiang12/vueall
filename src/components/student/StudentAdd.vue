@@ -47,14 +47,14 @@ export default {
         };
     },
     async created() {
-        let res = (await this.api.classes.getClasses()).data;
+        let res = (await this.api.classes.getClasses());
         if (res.status) {
             this.classes = res.data;
         }
     },
     methods: {
         async addStudent() {
-            let res = (await this.api.students.addStudent(this.student)).data;
+            let res = (await this.api.students.addStudent(this.student));
             if (res.status) {
                 alert(res.msg);
                 this.$router.push('/student/studentList');

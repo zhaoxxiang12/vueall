@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         async register() {
-            let res = (await this.api.users.register(this.user)).data;
+            let res = (await this.api.users.register(this.user));
             if (res.status) {
               alert(res.msg);
               this.$router.push('/user/login')

@@ -10,6 +10,11 @@ import UserLogin from '../components/user/UserLogin.vue';
 import StudentUpdate from '../components/student/StudentUpdate.vue';
 import Classes from '../components/classes/classes.vue';
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(error => error);
+};
+
 Vue.use(VueRouter);
 
 // 配置(url和组件的映射)
@@ -36,7 +41,7 @@ const routes = [
             },
             {
                 path: 'classes',
-                component: Classes
+                component: Classes,
             },
         ],
     },
@@ -64,6 +69,23 @@ const routes = [
 const router = new VueRouter({
     routes,
 });
+
+// 全局前置守卫
+// router.beforeEach((to, from, next) => {
+//     // to 到哪里去 目标
+//     console.log(to.path);
+//     // from 原目标
+//     // 放行
+//     if (to.path == '/user/login' || to.path == '/user/register') {
+//         next();
+//     } else {
+//         if (localStorage.token) {
+//             next();
+//         } else {
+//             router.push('/user/login');
+//         }
+//     }
+// });
 
 // 暴露路由对象
 export default router;

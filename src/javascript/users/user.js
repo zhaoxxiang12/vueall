@@ -27,6 +27,17 @@ function register (data) {
     })
 }
 
+/**
+ * 
+ * @returns 返回promise对象
+ */
+function getUserInfo () {
+    return axios({
+        url: '/users/getUserInfo',
+        method: 'get'
+    })
+}
+
 export default {
-    login, register
+    login, register, getUserInfo
 }

@@ -7,7 +7,7 @@ import axios from "../http/axios.js";
  */
 function getClasses (params) {
     return axios({
-        url: '/clas/getAllClasses',
+        url: '/class/getClassesInfo',
         method: 'get',
         params
     })
@@ -16,11 +16,11 @@ function getClasses (params) {
 /**
  * 
  * @param {String} params 
- * @returns 返回promise对象
+ * @returns 
  */
 function getClassesByPage (params) {
     return axios({
-        url: '/clas/getClas',
+        url: '/class/getClassesInfoByPage',
         method: 'get',
         params
     })

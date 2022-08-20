@@ -24,9 +24,10 @@ export default {
     },
     methods: {
         async login() {
-            let res = (await this.api.users.login(this.user)).data;
+            let res = (await this.api.users.login(this.user));
             if (res.status) {
                 alert(res.msg)
+                localStorage.setItem('token', res.token)
                 this.$router.push('/student/studentList');
             } else {
                 alert(res.msg)

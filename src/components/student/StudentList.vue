@@ -63,7 +63,7 @@ export default {
     },
     methods: {
         async delStu(_id) {
-            let res = (await this.api.students.delStudent({ _id })).data;
+            let res = (await this.api.students.delStudent({ _id }));
             if (res.status) {
                 alert(res.msg);
                 this.show();
@@ -72,7 +72,7 @@ export default {
             }
         },
         async show({ pageSize = 5, pageIndex = 1 } = {}) {
-            let res = (await this.api.students.getAllStudent({pageSize, pageIndex})).data;
+            let res = (await this.api.students.getAllStudent({pageSize, pageIndex}));
             if (res.status) {
                 this.student = res.data;
                 this.page = res.page;

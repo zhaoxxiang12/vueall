@@ -41,7 +41,6 @@ export default {
             default: [5, 6, 7],
         },
         total: {
-            type: Number,
             required: true,
         },
     },

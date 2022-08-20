@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         async show({pageSize = 5, pageIndex = 1}={}) {
-            let res = (await this.api.classes.getClassesByPage({pageIndex,pageSize})).data;
+            let res = (await this.api.classes.getClassesByPage({pageIndex,pageSize}));
             if(res.status) {
                 this.classes = res.page.clas
                 this.page = res.page
