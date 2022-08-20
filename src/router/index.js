@@ -9,6 +9,7 @@ import Register from '../components/user/Register.vue';
 import UserLogin from '../components/user/UserLogin.vue';
 import StudentUpdate from '../components/student/StudentUpdate.vue';
 import Classes from '../components/classes/classes.vue';
+import api from '../javascript/api';
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -44,6 +45,14 @@ const routes = [
                 component: Classes,
             },
         ],
+        // 导航守卫拦截
+        async beforeEnter(to, from, next) {
+            // ...
+            let res = await api.users.getUserInfo();
+            if (res.status) {
+                next()
+            }
+        },
     },
     {
         path: '/frontPage',
