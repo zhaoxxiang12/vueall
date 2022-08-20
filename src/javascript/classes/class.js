@@ -13,6 +13,20 @@ function getClasses (params) {
     })
 }
 
+/**
+ * 
+ * @param {String} params 
+ * @returns 返回promise对象
+ */
+function getClassesByPage (params) {
+    return axios({
+        url: '/clas/getClas',
+        method: 'get',
+        params
+    })
+}
+
 export default {
-    getClasses
+    getClasses,
+    getClassesByPage
 }

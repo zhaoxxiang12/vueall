@@ -8,6 +8,7 @@ import User from '../components/user/User.vue';
 import Register from '../components/user/Register.vue';
 import UserLogin from '../components/user/UserLogin.vue';
 import StudentUpdate from '../components/student/StudentUpdate.vue';
+import Classes from '../components/classes/classes.vue';
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,10 @@ const routes = [
             {
                 path: 'StudentUpdate',
                 component: StudentUpdate,
+            },
+            {
+                path: 'classes',
+                component: Classes
             },
         ],
     },

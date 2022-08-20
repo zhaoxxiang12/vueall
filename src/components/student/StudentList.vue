@@ -36,42 +36,7 @@
             <tfoot>
                 <tr>
                     <td colspan="8">
-                        <select v-model="page.pageSize" @change="change">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                        </select>
-                        &nbsp;
-                        <a href="" @click.prevent="first">首页</a>
-                        &nbsp;
-                        <a
-                            href=""
-                            @click.prevent="prev"
-                            :class="page.pageIndex == 1 ? { disabled: true } : { canClick: true }"
-                        >
-                            上一页
-                        </a>
-                        &nbsp;
-                        <a
-                            href=""
-                            @click.prevent="next"
-                            :class="
-                                page.pageIndex == page.pageTotal
-                                    ? { disabled: true }
-                                    : { canClick: true }
-                            "
-                        >
-                            下一页
-                        </a>
-                        &nbsp;
-                        <a href="" @click.prevent="last">尾页</a>
-                        &nbsp; 第
-                        <span>{{ page.pageIndex }}</span>
-                        页 / 共
-                        <span>{{ page.total }}</span>
-                        条 &nbsp; 共
-                        <span>{{ page.pageTotal }}</span>
-                        页
+                        <Page :pageArray="[5, 10, 15]" @go="show" :total="page.total" />
                     </td>
                 </tr>
             </tfoot>
@@ -80,6 +45,7 @@
 </template>
 
 <script>
+import Page from '../utils/Page.vue';
 export default {
     data() {
         return {
@@ -105,9 +71,8 @@ export default {
                 alert('删除失败');
             }
         },
-
-        async show() {
-            let res = (await this.api.students.getAllStudent(this.page)).data;
+        async show({ pageSize = 5, pageIndex = 1 } = {}) {
+            let res = (await this.api.students.getAllStudent({pageSize, pageIndex})).data;
             if (res.status) {
                 this.student = res.data;
                 this.page = res.page;
@@ -121,35 +86,8 @@ export default {
                 },
             });
         },
-        // 首页
-        first() {
-            this.page.pageIndex = 1;
-            this.show();
-        },
-        // 上一页
-        prev() {
-            if (this.page.pageIndex > 1) {
-                this.page.pageIndex--;
-                this.show();
-            }
-        },
-        // 下一页
-        next() {
-            if (this.page.pageIndex < this.page.pageTotal) {
-                this.page.pageIndex++;
-                this.show();
-            }
-        },
-        // 尾页
-        last() {
-            this.page.pageIndex = this.page.pageTotal;
-            this.show();
-        },
-        change() {
-            this.page.pageIndex = 1;
-            this.show();
-        },
     },
+    components: { Page },
 };
 </script>
 

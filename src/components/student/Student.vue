@@ -10,6 +10,9 @@
                 <li>
                     <router-link to="/student/studentAdd">学生添加</router-link>
                 </li>
+                <li>
+                    <router-link to="/student/classes">班级列表</router-link>
+                </li>
             </ul>
             <div style="flex-grow: 1; border: 1px solid red">
                 <router-view></router-view>
