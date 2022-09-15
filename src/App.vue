@@ -8,6 +8,7 @@
         </nav> -->
         <!-- <router-view /> -->
         <User />
+        <HOME/>
     </div>
 </template>
 
@@ -35,9 +36,11 @@ nav {
 </style>
 <script>
 import User from './components/user/User.vue';
+import HOME from './components/VUEX/HOME.vue';
 export default {
     components: {
-        User,
-    },
+    User,
+    HOME
+},
 };
 </script>

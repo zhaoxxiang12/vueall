@@ -1,6 +1,10 @@
 <template>
     <div>
         <h1>student</h1>
+        <h2>
+            欢迎您
+            <span>{{user.username}}</span>
+        </h2>
         <router-link to="/frontPage">跳转到首页</router-link>
         <div style="display: flex">
             <ul>
@@ -22,7 +26,26 @@
 </template>
 
 <script>
-export default {};
+import { createNamespacedHelpers } from 'vuex';
+let { mapState: mapState_users, mapActions: mapActions_users } = createNamespacedHelpers('users');
+export default {
+    data () {
+        return {
+            user: {
+
+            }
+        }
+    },
+    methods: {
+        ...mapActions_users(['getUserInfo']),
+    },
+    async created() {
+        let res = await this.getUserInfo();
+        if (res.status) {
+            this.user = res.data
+        }
+    },
+};
 </script>
 
 <style></style>

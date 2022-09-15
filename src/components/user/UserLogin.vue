@@ -13,6 +13,32 @@
 </template>
 
 <script>
+// export default {
+//     data() {
+//         return {
+//             user: {
+//                 username: '',
+//                 password: '',
+//             },
+//         };
+//     },
+//     methods: {
+//         async login() {
+//             let res = (await this.api.users.login(this.user));
+//             if (res.status) {
+//                 alert(res.msg)
+//                 localStorage.setItem('token', res.token)
+//                 this.$router.push('/student/studentList');
+//             } else {
+//                 alert(res.msg)
+//             }
+//         },
+//     },
+// };
+
+// 使用模块化进行登录
+import { createNamespacedHelpers } from 'vuex';
+let { mapState: mapState_users, mapActions: mapActions_users } = createNamespacedHelpers('users');
 export default {
     data() {
         return {
@@ -23,17 +49,19 @@ export default {
         };
     },
     methods: {
+        ...mapActions_users(['userLogin']),
         async login() {
-            let res = (await this.api.users.login(this.user));
+            let res = await this.userLogin(this.user);
             if (res.status) {
-                alert(res.msg)
-                localStorage.setItem('token', res.token)
+                alert(res.msg);
+                localStorage.setItem('token', res.token);
                 this.$router.push('/student/studentList');
             } else {
-                alert(res.msg)
+                alert(res.msg);
             }
         },
     },
+    computed: {},
 };
 </script>
 

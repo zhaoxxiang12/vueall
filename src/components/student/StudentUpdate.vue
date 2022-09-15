@@ -86,6 +86,14 @@ export default {
                 alert(res.msg);
             }
         },
+        // 临时上传文件
+       async uploadTemp (e) {
+        let file = e.target.fiels[0];
+        let fd = new FormData();
+        fd.append('file', file)
+        let res = await this.api.students.uploadTemp(fd)
+        console.log(res);
+       } 
     },
 };
 </script>

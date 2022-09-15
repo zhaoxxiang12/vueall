@@ -2,7 +2,7 @@ import axios from 'axios';
 import router from '../../router/index.js';
 
 let newAxios = axios.create({
-    baseURL: 'http://localhost:3131',
+    baseURL: process.env.VUE_APP_URL,
     timeout: 3000,
 });
 

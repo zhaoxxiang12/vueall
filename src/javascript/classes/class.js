@@ -7,7 +7,7 @@ import axios from "../http/axios.js";
  */
 function getClasses (params) {
     return axios({
-        url: '/class/getClassesInfo',
+        url: '/api/class/getClassesInfo',
         method: 'get',
         params
     })
@@ -20,7 +20,7 @@ function getClasses (params) {
  */
 function getClassesByPage (params) {
     return axios({
-        url: '/class/getClassesInfoByPage',
+        url: '/api/class/getClassesInfoByPage',
         method: 'get',
         params
     })

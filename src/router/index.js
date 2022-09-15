@@ -10,6 +10,9 @@ import UserLogin from '../components/user/UserLogin.vue';
 import StudentUpdate from '../components/student/StudentUpdate.vue';
 import Classes from '../components/classes/classes.vue';
 import api from '../javascript/api';
+import store from '@/store';
+import Test from '../components/mixins/TEST.vue'
+import Test2 from '../components/mixins/TEST2.vue'
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -46,13 +49,13 @@ const routes = [
             },
         ],
         // 导航守卫拦截
-        async beforeEnter(to, from, next) {
-            // ...
-            let res = await api.users.getUserInfo();
-            if (res.status) {
-                next()
-            }
-        },
+        // async beforeEnter(to, from, next) {
+        //     // ...
+        //     let res = await api.users.getUserInfo();
+        //     if (res.status) {
+        //         next()
+        //     }
+        // },
     },
     {
         path: '/frontPage',
@@ -73,6 +76,14 @@ const routes = [
             },
         ],
     },
+    {
+        path: '/test',
+        component: Test
+    },
+    {
+        path: '/test2',
+        component: Test2
+    }
 ];
 
 const router = new VueRouter({
@@ -92,6 +103,22 @@ const router = new VueRouter({
 //             next();
 //         } else {
 //             router.push('/user/login');
+//         }
+//     }
+// });
+
+// router.beforeEach(async (to, from, next) => {
+//     if (to.path == '/login' || to.path == '/user/register') {
+//         next();
+//     } else {
+//         if (store.state.users.user) {
+//             next();
+//         } else {
+//             let res = await api.users.getUserInfo();
+//             if (res?.status) {
+//                 store.commit('CHANGE_USERS', res.data);
+//                 next();
+//             }
 //         }
 //     }
 // });

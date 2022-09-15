@@ -36,7 +36,7 @@
             <tfoot>
                 <tr>
                     <td colspan="8">
-                        <Page :pageArray="[5, 10, 15]" @go="show" :total="page.total" />
+                        <Page :pageArray="[5, 10, 15]" @go="getStus" :total="page.total" />
                     </td>
                 </tr>
             </tfoot>
@@ -46,48 +46,67 @@
 
 <script>
 import Page from '../utils/Page.vue';
+// export default {
+//     data() {
+//         return {
+//             student: [],
+//             page: {
+//                 total: 0,
+//                 pageTotal: 0,
+//                 pageSize: 5,
+//                 pageIndex: 1,
+//             },
+//         };
+//     },
+//     async created() {
+//         this.show();
+//     },
+//     methods: {
+//         async delStu(_id) {
+//             let res = (await this.api.students.delStudent({ _id }));
+//             if (res.status) {
+//                 alert(res.msg);
+//                 this.show();
+//             } else {
+//                 alert('删除失败');
+//             }
+//         },
+//         async show({ pageSize = 5, pageIndex = 1 } = {}) {
+//             let res = (await this.api.students.getAllStudent({pageSize, pageIndex}));
+//             if (res.status) {
+//                 this.student = res.data;
+//                 this.page = res.page;
+//             }
+//         },
+//         goUpdate(id) {
+//             this.$router.push({
+//                 path: '/student/StudentUpdate',
+//                 query: {
+//                     id: id,
+//                 },
+//             });
+//         },
+//     },
+//     components: { Page },
+// };
+
+// 使用模块化渲染
+import { createNamespacedHelpers } from 'vuex';
+let { mapState: mapState_stus, mapActions: mapActions_stus } = createNamespacedHelpers('stus');
 export default {
+    components: { Page },
     data() {
-        return {
-            student: [],
-            page: {
-                total: 0,
-                pageTotal: 0,
-                pageSize: 5,
-                pageIndex: 1,
-            },
-        };
+        return {};
     },
-    async created() {
-        this.show();
+    created() {
+        this.getStus();
     },
     methods: {
-        async delStu(_id) {
-            let res = (await this.api.students.delStudent({ _id }));
-            if (res.status) {
-                alert(res.msg);
-                this.show();
-            } else {
-                alert('删除失败');
-            }
-        },
-        async show({ pageSize = 5, pageIndex = 1 } = {}) {
-            let res = (await this.api.students.getAllStudent({pageSize, pageIndex}));
-            if (res.status) {
-                this.student = res.data;
-                this.page = res.page;
-            }
-        },
-        goUpdate(id) {
-            this.$router.push({
-                path: '/student/StudentUpdate',
-                query: {
-                    id: id,
-                },
-            });
-        },
+        ...mapActions_stus(['getStus']),
     },
-    components: { Page },
+    computed: {
+        ...mapState_stus(['student', 'page']),
+    },
 };
 </script>
 
